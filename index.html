@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Истории Архива</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- =========================
+         ГЛАВНОЕ МЕНЮ
+         ========================= -->
+
+    <section id="menu" class="screen active">
+
+        <div class="mystery-background">
+
+            <div class="moon"></div>
+
+            <div class="fog fog-one"></div>
+            <div class="fog fog-two"></div>
+
+            <div class="mystery-house">
+
+                <div class="house-roof"></div>
+
+                <div class="house-body">
+
+                    <div class="window window-one"></div>
+                    <div class="window window-two">
+
+                        <div class="ghost-silhouette"></div>
+
+                    </div>
+
+                    <div class="house-door"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="menu-content">
+
+            <div class="logo-small">
+                МИР, КОТОРЫЙ ХРАНИТ ИСТОРИИ
+            </div>
+
+            <h1>ИСТОРИИ<br>АРХИВА</h1>
+
+            <div class="title-line"></div>
+
+            <p class="subtitle">
+                Мир историй, которые ещё не закончились
+            </p>
+
+            <div class="menu-buttons">
+
+                <button onclick="startGame()">
+                    НОВОЕ ПРИКЛЮЧЕНИЕ
+                </button>
+
+                <button onclick="continueGame()">
+                    ▶ ПРОДОЛЖИТЬ
+                </button>
+
+                <button onclick="startFreeMode()">
+                    🌍 СВОБОДНЫЙ РЕЖИМ
+                </button>
+
+                <button onclick="showStories()">
+                    📖 ИСТОРИИ
+                </button>
+
+                <button onclick="showCreator()">
+                    ✍️ СОЗДАТЬ ИСТОРИЮ
+                </button>
+
+                <button onclick="showSaves()">
+                    💾 СОХРАНЕНИЯ
+                </button>
+
+                <button onclick="showSecrets()">
+                    🔐 ТАЙНЫ АРХИВА
+                </button>
+
+            </div>
+
+            <div class="version">
+                STORIES OF ARCHIVE // NEW BUILD
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         СОЗДАНИЕ ПЕРСОНАЖА
+         ========================= -->
+
+    <section id="character" class="screen">
+
+        <div class="panel">
+
+            <div class="panel-icon">👤</div>
+
+            <h2>СОЗДАНИЕ ПЕРСОНАЖА</h2>
+
+            <p>
+                Перед тем как войти в Архив,
+                назови своего персонажа.
+            </p>
+
+            <input
+                id="playerName"
+                type="text"
+                maxlength="20"
+                placeholder="Имя персонажа"
+            >
+
+            <button onclick="createCharacter()">
+                ВОЙТИ В АРХИВ
+            </button>
+
+            <button class="secondary" onclick="showScreen('menu')">
+                НАЗАД
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         СВОБОДНЫЙ РЕЖИМ
+         ========================= -->
+
+    <section id="freeMode" class="screen">
+
+        <div class="game-header">
+
+            <span id="playerDisplay">
+                👤 Игрок
+            </span>
+
+            <button onclick="showInventory()">
+                🎒
+            </button>
+
+            <button onclick="showSaves()">
+                💾
+            </button>
+
+            <button onclick="showScreen('menu')">
+                ⏎
+            </button>
+
+        </div>
+
+        <div class="world">
+
+            <div class="world-title">
+                СВОБОДНЫЙ РЕЖИМ
+            </div>
+
+            <div class="location-panel">
+
+                <div class="location-symbol">
+                    ◈
+                </div>
+
+                <h2 id="locationName">
+                    Центральная зона
+                </h2>
+
+                <p id="worldText">
+                    Ты находишься в неизвестной части Архива.
+                </p>
+
+            </div>
+
+
+            <div class="action-buttons">
+
+                <button onclick="exploreWorld()">
+                    🔎 ИССЛЕДОВАТЬ
+                </button>
+
+                <button onclick="waitForEvent()">
+                    ⏳ ПОДОЖДАТЬ
+                </button>
+
+            </div>
+
+
+            <div id="mapBox" class="map-box">
+
+                <h3>
+                    🗺️ КАРТА АРХИВА
+                </h3>
+
+                <div id="currentLocation">
+                    📍 Центральная зона
+                </div>
+
+                <div id="locations"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ИНВЕНТАРЬ
+         ========================= -->
+
+    <section id="inventory" class="screen">
+
+        <div class="panel">
+
+            <div class="panel-icon">
+                🎒
+            </div>
+
+            <h2>ИНВЕНТАРЬ</h2>
+
+            <div id="inventoryList">
+                Пока здесь пусто.
+            </div>
+
+            <button onclick="showScreen('freeMode')">
+                НАЗАД
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ИСТОРИИ
+         ========================= -->
+
+    <section id="stories" class="screen">
+
+        <div class="panel wide-panel">
+
+            <div class="panel-icon">
+                📖
+            </div>
+
+            <h2>ИСТОРИИ АРХИВА</h2>
+
+            <p>
+                Истории, которые можно начать,
+                продолжить и завершить по-разному.
+            </p>
+
+            <div id="storyList"></div>
+
+            <button onclick="showScreen('menu')">
+                НАЗАД
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         СОЗДАНИЕ ИСТОРИИ
+         ========================= -->
+
+    <section id="creator" class="screen">
+
+        <div class="panel wide-panel">
+
+            <div class="panel-icon">
+                ✍️
+            </div>
+
+            <h2>СОЗДАТЬ ИСТОРИЮ</h2>
+
+            <p>
+                Создай собственное приключение
+                и сохрани его в Архиве.
+            </p>
+
+            <input
+                id="storyTitle"
+                type="text"
+                maxlength="50"
+                placeholder="Название истории"
+            >
+
+            <textarea
+                id="storyText"
+                maxlength="3000"
+                placeholder="Начало истории..."
+            ></textarea>
+
+            <button onclick="createStory()">
+                СОХРАНИТЬ ИСТОРИЮ
+            </button>
+
+            <button
+                class="secondary"
+                onclick="showScreen('menu')"
+            >
+                НАЗАД
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         СОХРАНЕНИЯ
+         ========================= -->
+
+    <section id="saves" class="screen">
+
+        <div class="panel wide-panel">
+
+            <div class="panel-icon">
+                💾
+            </div>
+
+            <h2>СОХРАНЕНИЯ</h2>
+
+            <p>
+                Твои истории не заканчиваются,
+                когда ты закрываешь игру.
+            </p>
+
+            <div id="saveList">
+                Сохранений пока нет.
+            </div>
+
+            <button onclick="showScreen('menu')">
+                НАЗАД
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ТАЙНЫ
+         ========================= -->
+
+    <section id="secrets" class="screen">
+
+        <div class="panel">
+
+            <div class="panel-icon">
+                🔐
+            </div>
+
+            <h2>ТАЙНЫ АРХИВА</h2>
+
+            <p>
+                Некоторые тайны нельзя получить
+                просто нажав кнопку.
+            </p>
+
+            <p class="secret-warning">
+                Исследуй мир.
+                Принимай решения.
+                Иногда возвращайся туда,
+                где уже был.
+            </p>
+
+            <button onclick="showScreen('menu')">
+                НАЗАД
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ИГРОВОЕ СОБЫТИЕ
+         ========================= -->
+
+    <div id="eventBox" class="overlay hidden">
+
+        <div class="event-content">
+
+            <div id="eventIcon">
+                ◈
+            </div>
+
+            <h3 id="eventTitle"></h3>
+
+            <p id="eventText"></p>
+
+            <div id="eventChoices"></div>
+
+            <button
+                id="eventContinue"
+                onclick="closeEvent()"
+            >
+                ПРОДОЛЖИТЬ
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         СИСТЕМНОЕ СООБЩЕНИЕ
+         ========================= -->
+
+    <div id="message" class="overlay hidden">
+
+        <div class="message-box">
+
+            <div class="message-symbol">
+                ◈
+            </div>
+
+            <p id="messageText"></p>
+
+            <button onclick="closeMessage()">
+                OK
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         СОХРАНЕНИЕ
+         ========================= -->
+
+    <div id="saveNotice" class="save-notice hidden">
+        💾 Прогресс сохранён
+    </div>
+
+</div>
+
+
+<script src="game.js"></script>
+
+</body>
+      </html>
